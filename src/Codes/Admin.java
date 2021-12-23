@@ -2,6 +2,7 @@ package Codes;
 
 import Helper.DBConnect;
 import Helper.Messages;
+import View.AdminGUI;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 
 public class Admin extends Kullanıcılar {
 
-    private PreparedStatement preparedStatement=null;
+    private PreparedStatement preparedStatement = null;
 
     public Admin(String User_name, String User_pass, String User_type) {
         super(User_name, User_pass, User_type);
@@ -45,7 +46,7 @@ public class Admin extends Kullanıcılar {
         return listarr;
     }
 
-    public void addFilm(String filmName,String filmType,float filmPoint,int filmyear){
+    public void addFilm(String filmName, String filmType, float filmPoint, int filmyear, String director) {
 
         try {
             boolean ht = false;
@@ -60,10 +61,10 @@ public class Admin extends Kullanıcılar {
                     ht = true;
                 }
             }
-            if(ht)
+            if (ht)
                 Messages.showMesaj("have");
             if (!ht) {
-                String quary = "INSERT INTO cinema(Sinema_Ad,Sinema_Tur,Sinema_IMDB,Sinema_Yıl)" + " VALUES( '" + filmName + "','" + filmType + "','" +filmPoint+ "','"+filmyear+ "') ";
+                String quary = "INSERT INTO cinema(Sinema_Ad,Sinema_Tur,Sinema_IMDB,Sinema_Yıl,Director)" + " VALUES( '" + filmName + "','" + filmType + "','" + filmPoint + "','" + filmyear + "','" + director + "') ";
                 st.executeUpdate(quary);
                 Messages.showMesaj("succes");
 
@@ -93,22 +94,65 @@ public class Admin extends Kullanıcılar {
             userModel.addRow(userData);
         }
 
-    return userModel;
+        return userModel;
+    }
+    public static TableModel userListRemove(String userName){
+
+        DefaultTableModel userModel = null;
+        Object[] userData;
+
+        userModel = new DefaultTableModel();
+        Object[] colUser = new Object[2];
+
+        colUser[0] = "Kullanıcı İsmi";
+        colUser[1] = "Kullanıcı Şifre";
+
+        userModel.setColumnIdentifiers(colUser);
+        userData = new Object[2];
+        for (int i = 0; i < Admin.getUserList().size(); i++) {
+
+            if(Admin.getUserList().get(i).getUser_name().equals(userName)){
+
+                userData[0] = Admin.getUserList().get(i).getUser_name();
+                userData[1] = Admin.getUserList().get(i).getUser_pass();
+
+            }
+        }  userModel.addRow(userData);
+
+        return userModel;
     }
 
-
-
-
-    public boolean removeFilm(String filmName){
-        boolean key=false;
-        String quary = "DELETE FROM cinema WHERE Sinema_Ad='"+filmName+"'";
+    public boolean removeUser(String userName) {
+        boolean key = false;
+        String quary = "Delete FROM user WHERE Kullanici_Ad='" + userName + "'&& Kullanici_type='User'";
         DBConnect conn = new DBConnect();
         Connection con = conn.connDB_Cinema();
         Statement st = null;
         try {
             st = con.createStatement();
             st.executeUpdate(quary);
-            key=true;
+            key = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (key)
+            return true;
+        else
+            return false;
+
+    }
+
+
+    public boolean removeFilm(String filmName) {
+        boolean key = false;
+        String quary = "DELETE FROM cinema WHERE Sinema_Ad='" + filmName + "'";
+        DBConnect conn = new DBConnect();
+        Connection con = conn.connDB_Cinema();
+        Statement st = null;
+        try {
+            st = con.createStatement();
+            st.executeUpdate(quary);
+            key = true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -117,7 +161,20 @@ public class Admin extends Kullanıcılar {
             return true;
         else
             return false;
+
+
     }
+
+    public TableModel updateUserModel (TableModel tableModel){
+
+        DefaultTableModel clearModel = (DefaultTableModel) tableModel;
+        clearModel.setRowCount(0);
+        clearModel = (DefaultTableModel) userList();
+
+        return clearModel;
+
+    }
+
 
 }
 

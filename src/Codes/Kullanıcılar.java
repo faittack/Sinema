@@ -15,7 +15,7 @@ public class Kullanıcılar {
     private String User_name;
     private String User_pass;
     private String User_type;
-    static Kullanıcılar kullanıcılar=new Kullanıcılar();
+    static Kullanıcılar kullanıcılar = new Kullanıcılar();
 
 
     public Kullanıcılar() {
@@ -59,22 +59,24 @@ public class Kullanıcılar {
         DefaultTableModel sinemaModel = null;
         Object[] sinemaData;
 
-        Kullanıcılar kullanıcılar=new Kullanıcılar();
+        Kullanıcılar kullanıcılar = new Kullanıcılar();
         sinemaModel = new DefaultTableModel();
-        Object[] colSinema = new Object[4];
+        Object[] colSinema = new Object[5];
 
         colSinema[0] = "Film Adı";
         colSinema[1] = "Film Türü";
         colSinema[2] = "IMDB Puanı";
         colSinema[3] = "Film Yılı";
+        colSinema[4] = "Yönetmen";
 
         sinemaModel.setColumnIdentifiers(colSinema);
-        sinemaData = new Object[4];
+        sinemaData = new Object[5];
         for (int i = 0; i < kullanıcılar.getCinemaList().size(); i++) {
             sinemaData[0] = kullanıcılar.getCinemaList().get(i).getCinema_Ad();
             sinemaData[1] = kullanıcılar.getCinemaList().get(i).getCinema_type();
             sinemaData[2] = kullanıcılar.getCinemaList().get(i).getCinema_IMDB();
             sinemaData[3] = kullanıcılar.getCinemaList().get(i).getCinema_yil();
+            sinemaData[4]=kullanıcılar.getCinemaList().get(i).getDirector();
             sinemaModel.addRow(sinemaData);
         }
 
@@ -93,7 +95,7 @@ public class Kullanıcılar {
             st = con.createStatement();
             rt = st.executeQuery("SELECT * FROM cinema");
             while (rt.next()) {
-                obj = new Sinema(rt.getString("Sinema_Ad"), rt.getString("Sinema_Tur"), rt.getFloat("Sinema_IMDB"), rt.getInt("Sinema_Yıl"));
+                obj = new Sinema(rt.getString("Sinema_Ad"), rt.getString("Sinema_Tur"), rt.getFloat("Sinema_IMDB"), rt.getInt("Sinema_Yıl"),rt.getString("Director"));
                 list.add(obj);
 
             }
@@ -107,14 +109,16 @@ public class Kullanıcılar {
         return list;
 
     }
-    public TableModel updateSinemaModel(TableModel tableModel){
-        AdminGUI adminGUI=new AdminGUI(kullanıcılar);
-        DefaultTableModel clearModel= (DefaultTableModel)tableModel ;
-        clearModel.setRowCount(0);
-        clearModel= (DefaultTableModel) cinemaList();
 
-        return  clearModel;
+    public TableModel updateSinemaModel(TableModel tableModel) {
+
+        DefaultTableModel clearModel = (DefaultTableModel) tableModel;
+        clearModel.setRowCount(0);
+        clearModel = (DefaultTableModel) cinemaList();
+
+        return clearModel;
     }
+
 
 
 }
