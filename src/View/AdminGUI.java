@@ -9,8 +9,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class AdminGUI extends JFrame {
     static Kullanıcılar kullanıcılar=new Kullanıcılar();
@@ -32,6 +30,7 @@ public class AdminGUI extends JFrame {
     private JButton btn_adUserSearch;
     private JTextField fld_removeUser;
     private JTextField fld_direktor;
+    private JButton btn_firstTable;
 
 
     public AdminGUI(Kullanıcılar kullanıcılar){
@@ -167,6 +166,12 @@ public class AdminGUI extends JFrame {
 
 
                 }
+            }
+        });
+        btn_firstTable.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                admin_UserMenu.setModel(Admin.userList());
             }
         });
     }
