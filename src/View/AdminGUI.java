@@ -107,6 +107,7 @@ public class AdminGUI extends JFrame {
                         admin.removeUser(fld_removeUser.getText());
                         admin_UserMenu.setModel(admin.updateUserModel(admin_UserMenu.getModel()));
                         fld_removeUser.setText(null);
+                        Messages.showMesaj("succes");
                     } else{
                         Messages.showMesaj("hata");
                     }
