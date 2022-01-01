@@ -2,9 +2,11 @@ package Codes;
 
 import Helper.DBConnect;
 import View.AdminGUI;
+import View.UserGUI;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +18,7 @@ public class Kullanıcılar {
     private String User_pass;
     private String User_type;
     static Kullanıcılar kullanıcılar = new Kullanıcılar();
+    static UserGUI userGUI=new UserGUI(kullanıcılar);
 
 
     public Kullanıcılar() {
@@ -77,6 +80,35 @@ public class Kullanıcılar {
             sinemaData[2] = kullanıcılar.getCinemaList().get(i).getCinema_IMDB();
             sinemaData[3] = kullanıcılar.getCinemaList().get(i).getCinema_yil();
             sinemaData[4]=kullanıcılar.getCinemaList().get(i).getDirector();
+            sinemaModel.addRow(sinemaData);
+        }
+
+        return sinemaModel;
+
+    }
+    public static TableModel UpdateCinemaList() {
+
+        DefaultTableModel sinemaModel = null;
+        Object[] sinemaData;
+
+        Kullanıcılar kullanıcılar = new Kullanıcılar();
+        sinemaModel = new DefaultTableModel();
+        Object[] colSinema = new Object[5];
+
+        colSinema[0] = "Film Adı";
+        colSinema[1] = "Film Türü";
+        colSinema[2] = "IMDB Puanı";
+        colSinema[3] = "Film Yılı";
+        colSinema[4] = "Yönetmen";
+
+        sinemaModel.setColumnIdentifiers(colSinema);
+        sinemaData = new Object[5];
+        for (int i = 0; i <userGUI.SearchList.size(); i++) {
+            sinemaData[0] = userGUI.SearchList.get(i).getCinema_Ad();
+            sinemaData[1] = userGUI.SearchList.get(i).getCinema_type();
+            sinemaData[2] = userGUI.SearchList.get(i).getCinema_IMDB();
+            sinemaData[3] = userGUI.SearchList.get(i).getCinema_yil();
+            sinemaData[4]=userGUI.SearchList.get(i).getDirector();
             sinemaModel.addRow(sinemaData);
         }
 

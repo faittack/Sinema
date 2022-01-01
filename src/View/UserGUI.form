@@ -31,7 +31,7 @@
           </scrollpane>
         </children>
       </grid>
-      <grid id="5897f" layout-manager="GridLayoutManager" row-count="10" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="5897f" layout-manager="GridLayoutManager" row-count="11" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -41,18 +41,19 @@
         <children>
           <component id="3b6ee" class="javax.swing.JButton" binding="btn_UserSerch">
             <constraints>
-              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Ara"/>
             </properties>
           </component>
-          <component id="92ba4" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+          <component id="92ba4" class="javax.swing.JComboBox" binding="cmdBox_Point">
             <constraints>
-              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <model>
+                <item value="Seçiniz"/>
                 <item value="1"/>
                 <item value="2"/>
                 <item value="3"/>
@@ -65,28 +66,13 @@
               </model>
             </properties>
           </component>
-          <component id="ea06e" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+          <component id="3e488" class="javax.swing.JComboBox" binding="cmdBox_Type">
             <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <model>
-                <item value="2010"/>
-                <item value="2012"/>
-                <item value="2014"/>
-                <item value="2016"/>
-                <item value="2018"/>
-                <item value="2020"/>
-                <item value="2021"/>
-              </model>
-            </properties>
-          </component>
-          <component id="3e488" class="javax.swing.JComboBox" binding="ComBox_UserType">
-            <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <model>
+                <item value="Seçiniz"/>
                 <item value="Macera"/>
                 <item value="Aksiyon"/>
                 <item value="Dram"/>
@@ -97,7 +83,7 @@
           </component>
           <component id="eeba" class="javax.swing.JLabel">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Film Türü:"/>
@@ -105,7 +91,7 @@
           </component>
           <component id="bfa6f" class="javax.swing.JLabel">
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Film Yılı:"/>
@@ -113,7 +99,7 @@
           </component>
           <component id="5b4a8" class="javax.swing.JLabel">
             <constraints>
-              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Film Puanı:"/>
@@ -121,17 +107,57 @@
           </component>
           <vspacer id="36633">
             <constraints>
-              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
           <vspacer id="c984">
             <constraints>
-              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
-          <vspacer id="c45c5">
+          <component id="ea06e" class="javax.swing.JComboBox" binding="cmdBox_Year">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="Seçiniz"/>
+                <item value="2000"/>
+                <item value="2001"/>
+                <item value="2002"/>
+                <item value="2003"/>
+                <item value="2004"/>
+                <item value="2005"/>
+                <item value="2006"/>
+                <item value="2007"/>
+                <item value="2008"/>
+                <item value="2009"/>
+                <item value="2010"/>
+                <item value="2011"/>
+                <item value="2012"/>
+                <item value="2013"/>
+                <item value="2014"/>
+                <item value="2015"/>
+                <item value="2016"/>
+                <item value="2017"/>
+                <item value="2018"/>
+                <item value="2019"/>
+                <item value="2020"/>
+                <item value="2021"/>
+              </model>
+            </properties>
+          </component>
+          <component id="f4554" class="javax.swing.JButton" binding="btn_UserTablo">
+            <constraints>
+              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Tablo"/>
+            </properties>
+          </component>
+          <vspacer id="599d7">
+            <constraints>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
         </children>

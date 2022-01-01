@@ -22,29 +22,6 @@ public class Admin extends Kullanıcılar {
 
     }
 
-    public static ArrayList<Kullanıcılar> getUserList() {
-        ArrayList<Kullanıcılar> listarr = new ArrayList<>();
-        DBConnect conn = new DBConnect();
-        Statement st = null;
-        ResultSet rt = null;
-        Connection con = conn.connDB_Cinema();
-        Kullanıcılar obj;
-        try {
-            st = con.createStatement();
-            rt = st.executeQuery("SELECT * FROM user WHERE Kullanici_type='User'");
-            while (rt.next()) {
-                obj = new Kullanıcılar(rt.getString("Kullanici_Ad"), rt.getString("Kullanici_pass"), rt.getString("Kullanici_type"));
-                listarr.add(obj);
-            }
-            st.close();
-            con.close();
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return listarr;
-    }
 
     public void addFilm(String filmName, String filmType, float filmPoint, int filmyear, String director) {
 
@@ -74,6 +51,77 @@ public class Admin extends Kullanıcılar {
         }
     }
 
+
+    public boolean removeFilm(String filmName) {
+        boolean key = false;
+        String quary = "DELETE FROM cinema WHERE Sinema_Ad='" + filmName + "'";
+        DBConnect conn = new DBConnect();
+        Connection con = conn.connDB_Cinema();
+        Statement st = null;
+        try {
+            st = con.createStatement();
+            st.executeUpdate(quary);
+            key = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (key)
+            return true;
+        else
+            return false;
+
+
+    }
+
+
+    public boolean updateFilm(String FilmName, String FilmType, float FilmIMDB, int FilmYear, String Director, String filmAdı) {
+        boolean key = false;
+        String quary = "UPDATE cinema SET Sinema_Ad='" + FilmName + "',Sinema_Tur='"+FilmType+"',Sinema_IMDB='"+FilmIMDB+"',Sinema_Yıl='"+FilmYear+"',Director='"+Director+"' WHERE Sinema_Ad='" + filmAdı + "'";
+        DBConnect conn = new DBConnect();
+        Connection con = conn.connDB_Cinema();
+        Statement st = null;
+        try {
+            st = con.createStatement();
+            st.executeUpdate(quary);
+            key = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (key)
+            return true;
+        else
+            return false;
+
+
+    }
+
+    public static ArrayList<Kullanıcılar> getUserList() {
+        ArrayList<Kullanıcılar> listarr = new ArrayList<>();
+        DBConnect conn = new DBConnect();
+        Statement st = null;
+        ResultSet rt = null;
+        Connection con = conn.connDB_Cinema();
+        Kullanıcılar obj;
+        // TODO Try-Catch
+        try {
+            st = con.createStatement();
+            rt = st.executeQuery("SELECT * FROM user WHERE Kullanici_type='User'");
+            while (rt.next()) {
+                obj = new Kullanıcılar(rt.getString("Kullanici_Ad"), rt.getString("Kullanici_pass"), rt.getString("Kullanici_type"));
+                listarr.add(obj);
+            }
+            st.close();
+            con.close();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listarr;
+    }
+
     public static TableModel userList() {
 
 
@@ -96,7 +144,8 @@ public class Admin extends Kullanıcılar {
 
         return userModel;
     }
-    public static TableModel userListRemove(String userName){
+
+    public static TableModel userListRemove(String userName) {
 
         DefaultTableModel userModel = null;
         Object[] userData;
@@ -111,13 +160,14 @@ public class Admin extends Kullanıcılar {
         userData = new Object[2];
         for (int i = 0; i < Admin.getUserList().size(); i++) {
 
-            if(Admin.getUserList().get(i).getUser_name().equals(userName)){
+            if (Admin.getUserList().get(i).getUser_name().equals(userName)) {
 
                 userData[0] = Admin.getUserList().get(i).getUser_name();
                 userData[1] = Admin.getUserList().get(i).getUser_pass();
 
             }
-        }  userModel.addRow(userData);
+        }
+        userModel.addRow(userData);
 
         return userModel;
     }
@@ -142,30 +192,7 @@ public class Admin extends Kullanıcılar {
 
     }
 
-
-    public boolean removeFilm(String filmName) {
-        boolean key = false;
-        String quary = "DELETE FROM cinema WHERE Sinema_Ad='" + filmName + "'";
-        DBConnect conn = new DBConnect();
-        Connection con = conn.connDB_Cinema();
-        Statement st = null;
-        try {
-            st = con.createStatement();
-            st.executeUpdate(quary);
-            key = true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        if (key)
-            return true;
-        else
-            return false;
-
-
-    }
-
-    public TableModel updateUserModel (TableModel tableModel){
+    public TableModel updateUserModel(TableModel tableModel) {
 
         DefaultTableModel clearModel = (DefaultTableModel) tableModel;
         clearModel.setRowCount(0);

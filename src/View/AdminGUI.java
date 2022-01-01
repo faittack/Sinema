@@ -7,13 +7,18 @@ import Helper.Messages;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class AdminGUI extends JFrame {
-    static Kullanıcılar kullanıcılar=new Kullanıcılar();
-    static AdminGUI adminGUI=new AdminGUI(kullanıcılar);
-    static Admin admin=new Admin();
+    static Kullanıcılar kullanıcılar = new Kullanıcılar();
+    static AdminGUI adminGUI = new AdminGUI(kullanıcılar);
+    static Admin admin = new Admin();
+    static String filmAd;
     private JPanel panel1;
     public JTable Sinema_table;
     private JButton btn_remove;
@@ -33,12 +38,12 @@ public class AdminGUI extends JFrame {
     private JButton btn_firstTable;
 
 
-    public AdminGUI(Kullanıcılar kullanıcılar){
+    public AdminGUI(Kullanıcılar kullanıcılar) {
 
-        user_table.setTitleAt(1,"Kullanıcı Ayarları");
+        user_table.setTitleAt(1, "Kullanıcı Ayarları");
 
         add(panel1);
-        setBounds(600,250,600,500);
+        setBounds(600, 250, 600, 500);
         setTitle("Admin");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -52,7 +57,12 @@ public class AdminGUI extends JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 try {
                     fld_deleteFilmName.setText(Sinema_table.getValueAt(Sinema_table.getSelectedRow(), 0).toString());
-                }catch (Exception ex){
+
+                    String SelectAd = Sinema_table.getValueAt(Sinema_table.getSelectedRow(), 0).toString();
+
+                    filmAd=SelectAd;
+
+                } catch (Exception ex) {
 
                 }
             }
@@ -62,53 +72,54 @@ public class AdminGUI extends JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 try {
                     fld_removeUser.setText(admin_UserMenu.getValueAt(admin_UserMenu.getSelectedRow(), 0).toString());
+
+
                 } catch (Exception ex) {
                 }
             }
         });
 
 
-
         btn_remove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(fld_deleteFilmName.getText().length()!=0){
+                if (fld_deleteFilmName.getText().length() != 0) {
 
-                        admin.removeFilm(fld_deleteFilmName.getText());
 
-                        Sinema_table.setModel(kullanıcılar.updateSinemaModel(Sinema_table.getModel()));
+                    admin.removeFilm(fld_deleteFilmName.getText());
 
-                        fld_deleteFilmName.setText(null);
+                    Sinema_table.setModel(kullanıcılar.updateSinemaModel(Sinema_table.getModel()));
+
+                    fld_deleteFilmName.setText(null);
 
                     Messages.showMesaj("succes");
 
-                }
-                else
+                } else
                     Messages.showMesaj("fill");
 
 
-                }
+            }
 
         });
 
         btn_adUserRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean key=false;
-                if(fld_removeUser.getText().length()==0)
+                boolean key = false;
+                if (fld_removeUser.getText().length() == 0)
                     Messages.showMesaj("fill");
                 else {
-                    for (int i=0;i<Admin.getUserList().size();i++){
-                        if(fld_removeUser.getText().equals(Admin.getUserList().get(i).getUser_name())){
-                            key=true;
+                    for (int i = 0; i < Admin.getUserList().size(); i++) {
+                        if (fld_removeUser.getText().equals(Admin.getUserList().get(i).getUser_name())) {
+                            key = true;
                         }
                     }
-                    if(key){
+                    if (key) {
                         admin.removeUser(fld_removeUser.getText());
                         admin_UserMenu.setModel(admin.updateUserModel(admin_UserMenu.getModel()));
                         fld_removeUser.setText(null);
                         Messages.showMesaj("succes");
-                    } else{
+                    } else {
                         Messages.showMesaj("hata");
                     }
                 }
@@ -118,21 +129,21 @@ public class AdminGUI extends JFrame {
         btn_add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(fld_FilName.getText().length()==0||fld_Filpoint.getText().length()==0||fld_Filyear.getText().length()==0||"Tür Seçiniz !".equals(cmd_box.getSelectedItem())||fld_direktor.getText().length()==0){
+                if (fld_FilName.getText().length() == 0 || fld_Filpoint.getText().length() == 0 || fld_Filyear.getText().length() == 0 || "Tür Seçiniz !".equals(cmd_box.getSelectedItem()) || fld_direktor.getText().length() == 0) {
                     Messages.showMesaj("fill");
 
-                }else if( Float.parseFloat(fld_Filpoint.getText()) > 10 ||Float.parseFloat(fld_Filpoint.getText())<=0||Integer.parseInt(fld_Filyear.getText())<1900){
+                } else if (Float.parseFloat(fld_Filpoint.getText()) > 10 || Float.parseFloat(fld_Filpoint.getText()) <= 0 || Integer.parseInt(fld_Filyear.getText()) < 2000) {
 
                     Messages.showMesaj("hata");
 
-                }else{
-                    String name=fld_FilName.getText();
-                    String type= (String) cmd_box.getSelectedItem();
-                    float point=Float.parseFloat(fld_Filpoint.getText());
-                    int year=Integer.parseInt(fld_Filyear.getText());
-                    String director=fld_direktor.getText();
-                    Admin admin=new Admin();
-                    admin.addFilm(name,type,point,year,director);
+                } else {
+                    String name = fld_FilName.getText();
+                    String type = (String) cmd_box.getSelectedItem();
+                    float point = Float.parseFloat(fld_Filpoint.getText());
+                    int year = Integer.parseInt(fld_Filyear.getText());
+                    String director = fld_direktor.getText();
+                    Admin admin = new Admin();
+                    admin.addFilm(name, type, point, year, director);
                     fld_FilName.setText(null);
                     cmd_box.setSelectedIndex(0);
                     fld_Filpoint.setText(null);
@@ -142,6 +153,27 @@ public class AdminGUI extends JFrame {
 
 
                 }
+            }
+        });
+
+
+        Sinema_table.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+
+                if (e.getType() == TableModelEvent.UPDATE) {
+
+
+                    String SelectType = Sinema_table.getValueAt(Sinema_table.getSelectedRow(), 1).toString();
+                    float SelectIMDB = Float.parseFloat(Sinema_table.getValueAt(Sinema_table.getSelectedRow(), 2).toString());
+                    int SelectYear = Integer.parseInt(Sinema_table.getValueAt(Sinema_table.getSelectedRow(), 3).toString());
+                    String SelectDirector = Sinema_table.getValueAt(Sinema_table.getSelectedRow(), 4).toString();
+                    String SelectName = Sinema_table.getValueAt(Sinema_table.getSelectedRow(), 0).toString();
+
+                  admin.updateFilm(SelectName,SelectType,SelectIMDB,SelectYear,SelectDirector,filmAd);
+
+                }
+
             }
         });
 
@@ -173,15 +205,16 @@ public class AdminGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 admin_UserMenu.setModel(Admin.userList());
+                fld_removeUser.setText(null);
             }
         });
     }
-    public static void openAdminGUI(){
-        AdminGUI adminGUI=new AdminGUI(kullanıcılar);
+
+    public static void openAdminGUI() {
+        AdminGUI adminGUI = new AdminGUI(kullanıcılar);
         adminGUI.setVisible(true);
 
     }
-
 
 
     private void createUIComponents() {

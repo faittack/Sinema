@@ -29,14 +29,16 @@ public class Messages {
             case "any":
                 msj="Kullanıcı bulunamadı.";
                 break;
-
+            case "not found":
+                msj="Aradığınız bulunamadı.";
+                break;
             default:
                 msj = str;
         }
         JOptionPane.showMessageDialog(null, msj, "Mesaj", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public static boolean confirm(String str){
+   /* public static boolean confirm(String str){
         String msj;
             switch (str){
                 case"sure":
@@ -53,5 +55,5 @@ public class Messages {
             else
                 return false;
 
-    }
+    }*/
 }
