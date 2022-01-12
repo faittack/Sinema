@@ -13,7 +13,7 @@ import Helper.*;
 
 import static View.AdminGUI.*;
 
-public class Demo extends JFrame {
+public class MainGUI extends JFrame {
     private JPanel fld_JPanel;
     private JTabbedPane tabbedPane1;
     private JPanel tabb_Kullnıcı;
@@ -31,7 +31,7 @@ public class Demo extends JFrame {
     private JLabel fld_UserName;
     private DBConnect conn = new DBConnect();
 
-    public Demo() {
+    public MainGUI() {
         add(fld_JPanel);
         setBounds(600, 250, 400, 300);
         setTitle("Sinemalar");
@@ -117,7 +117,7 @@ public class Demo extends JFrame {
     }
 
     public static void OpenPanel() {
-        Demo demo = new Demo();
+        MainGUI demo = new MainGUI();
         demo.setVisible(true);
     }
 
