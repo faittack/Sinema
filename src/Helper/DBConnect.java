@@ -18,16 +18,4 @@ public class DBConnect {
         }
         return c;
     }
-
-    /*public Connection connDB_User(){
-
-        try {
-            this.d=DriverManager.getConnection("jdbc:mariadb://localhost:3306/database?user=root");
-            return d;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return d;
-    }*/
-
 }

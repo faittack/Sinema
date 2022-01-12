@@ -38,22 +38,4 @@ public class Messages {
         JOptionPane.showMessageDialog(null, msj, "Mesaj", JOptionPane.INFORMATION_MESSAGE);
     }
 
-   /* public static boolean confirm(String str){
-        String msj;
-            switch (str){
-                case"sure":
-                    msj="Bu işlemi yapmak istiyor musun?";
-                    break;
-                default:
-                    msj=str;
-                    break;
-            }
-
-            int duru=JOptionPane.showConfirmDialog(null,msj,"Dikkat!",JOptionPane.YES_NO_OPTION);
-            if (duru==0)
-                return true;
-            else
-                return false;
-
-    }*/
 }
